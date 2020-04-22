@@ -52,9 +52,10 @@ class TestAntiSpam(TestCase):
     def test_setting_none(self):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_NONE
 
-        self.assertFalse(is_spam(self.request, not_spam, settings.ANTI_SPAM_LEVEL))
-        self.assertFalse(is_spam(self.request, probable_spam, settings.ANTI_SPAM_LEVEL))
-        self.assertFalse(is_spam(self.request, definite_spam, settings.ANTI_SPAM_LEVEL))
+        with self.vcr.use_cassette('test_setting_none.yaml'):
+            self.assertFalse(is_spam(self.request, not_spam, settings.ANTI_SPAM_LEVEL))
+            self.assertFalse(is_spam(self.request, probable_spam, settings.ANTI_SPAM_LEVEL))
+            self.assertFalse(is_spam(self.request, definite_spam, settings.ANTI_SPAM_LEVEL))
 
     def test_setting_low(self):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_LOW
