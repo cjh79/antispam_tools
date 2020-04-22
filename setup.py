@@ -16,9 +16,7 @@ setup(
 
     install_requires=[
         'django',
-        # NOTE: this does not seem to work. It seems to still be installing the pypi version of django-antispam, which
-        # has a bug (converts a datetime to an int, which breaks tests).
-        'django-antispam @ git+https://github.com/mixkorshun/django-antispam@ad9ffbc8950f41f71efb3501bc545a588c8991a4#egg=django_antispam',
+        'django-antispam @ git+https://github.com/cjh79/django-antispam@a9026d30650e72323fd31384e9a40b9dc6eb4323#egg=django_antispam',
     ],
     tests_require=[
         'factory_boy',
