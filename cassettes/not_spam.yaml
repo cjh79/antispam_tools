@@ -1,0 +1,38 @@
+interactions:
+- request:
+    body: is_test=False&comment_type=comment&referrer=&comment_content=Hello+world%2C+this+is+a+cool+comment&user_agent=&user_ip=127.0.0.1&charset=utf-8&blog=ride.guru&comment_date_gmt=2020-04-22T02%3A29%3A24.759891
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '205'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Unknown Application/0.0.0 | Python-Akismet/0.4.1
+    method: POST
+    uri: https://*****.rest.akismet.com/1.1/comment-check
+  response:
+    body:
+      string: 'false'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '5'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Wed, 22 Apr 2020 02:29:24 GMT
+      Server:
+      - nginx
+      X-akismet-guid:
+      - aec1bb840f37c3b37742b5964387e7c5
+    status:
+      code: 200
+      message: OK
+version: 1

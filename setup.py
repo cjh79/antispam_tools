@@ -20,13 +20,14 @@ setup(
     ],
 
     tests_require=[
+        'factory_boy',
         'vcrpy',
-        'factory-boy==2.11.1',
+        'mock',
     ],
 
     packages=find_packages(exclude=['tests.*', 'tests']),
 
-    test_suite='tests',
+    test_suite = "runtests.runtests",
 
     classifiers=[],
 )

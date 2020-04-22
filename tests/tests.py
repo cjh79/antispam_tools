@@ -6,7 +6,7 @@ from tests.factories import UserFactory
 import vcr
 from django import forms
 from django.test import TestCase, RequestFactory
-from mezzanine.conf import settings
+from django.conf import settings
 from mock import patch
 
 
