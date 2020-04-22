@@ -42,14 +42,14 @@ def is_trusted(user):
         or hasattr(user, 'is_trusted') and user.is_trusted
 
 
-def is_spam(request, content):
+def is_spam(request, content, spam_level=ANTI_SPAM_LEVEL_HIGH):
     ak_request = akismet.Request.from_django_request(request)
     ak_comment = akismet.Comment(content, type='comment', )
     # ak_author = akismet.Author(name=self.cleaned_data['name'], email=self.cleaned_data['email'])
 
-    if settings.ANTI_SPAM_LEVEL == ANTI_SPAM_LEVEL_HIGH:
+    if spam_level == ANTI_SPAM_LEVEL_HIGH:
         bad_results = (SpamStatus.ProbableSpam, SpamStatus.DefiniteSpam,)
-    elif settings.ANTI_SPAM_LEVEL == ANTI_SPAM_LEVEL_LOW:
+    elif spam_level == ANTI_SPAM_LEVEL_LOW:
         bad_results = (SpamStatus.DefiniteSpam,)
     else:
         bad_results = ()
@@ -93,4 +93,15 @@ class AntiSpamForm(forms.Form):
         :return:
         """
         pass
+
+    def is_spam(self, spam_content):
+        return is_spam(self.request if self.request else None, spam_content, spam_level=self.get_spam_level())
+
+    def get_spam_level(self):
+        """
+        Subclasses should override this if they have their own mechanism for determining spam level, such as mezzanine's
+        editable settings object.
+        :return:
+        """
+        return getattr(settings, 'ANTI_SPAM_LEVEL', ANTI_SPAM_LEVEL_HIGH)
 
