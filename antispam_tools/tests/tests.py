@@ -1,7 +1,7 @@
-from forms import AntiSpamForm, ReCaptchaForm, ANTI_SPAM_LEVEL_NONE, is_spam, ANTI_SPAM_LEVEL_LOW, ANTI_SPAM_LEVEL_HIGH, \
+from antispam_tools.forms import AntiSpamForm, ReCaptchaForm, ANTI_SPAM_LEVEL_NONE, is_spam, ANTI_SPAM_LEVEL_LOW, ANTI_SPAM_LEVEL_HIGH, \
     is_trusted
 from django.contrib.auth.models import AnonymousUser
-from tests.factories import UserFactory
+from antispam_tools.tests.factories import UserFactory
 
 import vcr
 from django import forms
@@ -86,7 +86,7 @@ class TestAntiSpam(TestCase):
         # with self.vcr.use_cassette('definite_spam.yaml'):
         #     self.assertTrue(is_spam(self.request, definite_spam))
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_checks_for_spam_if_anti_spam_setting_is_low(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_LOW
 
@@ -103,7 +103,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertTrue(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_checks_for_spam_if_anti_spam_setting_is_high(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_HIGH
 
@@ -120,7 +120,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertTrue(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_does_not_check_for_spam_if_anti_spam_setting_is_none(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_NONE
 
@@ -135,7 +135,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertFalse(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_does_not_check_for_spam_if_user_is_trusted(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_HIGH
 
@@ -151,7 +151,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertFalse(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_does_not_check_for_spam_if_user_is_staff_high(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_HIGH
 
@@ -168,7 +168,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertFalse(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_does_not_check_for_spam_if_user_is_trusted_low_high(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_LOW
 
@@ -184,7 +184,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertFalse(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_does_not_check_for_spam_if_user_is_staff_low(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_LOW
 
@@ -201,7 +201,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertFalse(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_does_not_check_for_spam_if_user_is_trusted_none(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_NONE
 
@@ -217,7 +217,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertFalse(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_does_not_check_for_spam_if_user_is_staff_none(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_NONE
 
@@ -234,7 +234,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertFalse(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_checks_for_spam_if_user_is_anonymous(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_HIGH
 
@@ -249,7 +249,7 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertTrue(mock_is_spam.called)
 
-    @patch('forms.is_spam', side_effect=lambda a, b: False)
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: False)
     def test_anti_spam_form_checks_for_spam_if_request_not_set(self, mock_is_spam):
         settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_HIGH
 

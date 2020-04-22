@@ -24,7 +24,7 @@ setup(
         'mock',
     ],
 
-    packages=find_packages(exclude=['tests.*', 'tests']),
+    packages=find_packages(exclude=['antispam_tools.tests.*', 'antispam_tools.tests']),
 
     test_suite = "runtests.runtests",
 
