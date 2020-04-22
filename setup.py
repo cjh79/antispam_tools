@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='antispam',
+    name='antispam_tools',
     version='1.0',
-    url='https://github.com/cjh79/antispam',
+    url='https://github.com/cjh79/antispam_tools',
     description='Anti-spam forms for Unleashed LLC.',
     keywords=[],
 
