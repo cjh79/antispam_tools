@@ -1,0 +1,16 @@
+/.idea
+/.tox
+/.eggs
+/*.egg-info
+
+/.coverage
+/.eggs
+/dist
+/build
+/env
+/*.egg-info
+/docs/_build
+cassettes
+mydatabase
+*.pyc
+__pycache__
