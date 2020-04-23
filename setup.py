@@ -4,7 +4,7 @@ setup(
     name='antispam_tools',
     version='1.0',
     url='https://github.com/cjh79/antispam_tools',
-    description='Anti-spam forms for Unleashed LLC.',
+    description='Anti-spam forms and other tools for Django',
     keywords=[],
 
     long_description='',
