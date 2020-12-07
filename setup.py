@@ -16,7 +16,7 @@ setup(
 
     install_requires=[
         'django',
-        'django-antispam @ git+https://github.com/cjh79/django-antispam@a9026d30650e72323fd31384e9a40b9dc6eb4323#egg=django_antispam',
+        'django-antispam',
     ],
     tests_require=[
         'factory_boy',
