@@ -263,6 +263,28 @@ class TestAntiSpam(TestCase):
         self.assertTrue(form.is_valid())
         self.assertTrue(mock_is_spam.called)
 
+    @patch('antispam_tools.forms.is_spam', side_effect=lambda a, b: True)
+    def test_anti_spam_form_deactivates_user_if_spam_detected(self, mock_is_spam):
+        settings.ANTI_SPAM_LEVEL = ANTI_SPAM_LEVEL_HIGH
+
+        data = {
+            'content': 'I am spam',
+        }
+
+        form = TestAntiSpamForm(data=data, initial=data)
+        self.request.user = UserFactory()
+        self.request.user.is_trusted = False
+
+        self.assertTrue(self.request.user.is_active)
+
+        form.request = self.request
+
+        self.assertFalse(form.is_valid())
+        self.assertTrue(mock_is_spam.called)
+
+        self.request.user.refresh_from_db()
+        self.assertFalse(self.request.user.is_active)
+
     def test_recaptcha_form_displays_recaptcha_if_request_not_set(self):
         form = TestReCaptchaForm(None, data={}, initial={})
 
