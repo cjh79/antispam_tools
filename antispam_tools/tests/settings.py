@@ -37,7 +37,7 @@ TEMPLATES = [
     },
 ]
 
-AKISMET_API_KEY = '*****'
+AKISMET_API_KEY = ''
 AKISMET_SITE_URL = 'ride.guru'
 AKISMET_TEST_MODE = False
 RECAPTCHA_SITEKEY = ''
