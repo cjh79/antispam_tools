@@ -82,9 +82,9 @@ class AntiSpamForm(forms.Form):
         if not (disabled_via_settings or trusted_user):
             spam_content = ' '.join([self.cleaned_data[field] for field in self.spam_content_fields])
             if is_spam(request, spam_content):
-                self.report_spam(spam_content)
                 request.user.is_active = False
                 request.user.save()
+                self.report_spam(spam_content)
                 raise ValidationError('Spam detected', code='spam-protection')
         return super().clean()
 
